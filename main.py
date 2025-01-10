@@ -3,9 +3,8 @@ from methods import draw_board, draw_figure, check_for_win, check_turn
 
 spots = {1:"1", 2:"2", 3:"3", 4:"4", 5:"5", 6:"6", 7:"7", 8:"8", 9:"9"}
 
-pla_choi = player_choosing_fig()
 
-# TODO 
+# definig a method to allow play again after game ends
 def the_game(spots):
     complete = False
     game = True
@@ -20,7 +19,7 @@ def the_game(spots):
 
         draw_board(spots)
 
-        draw = input(f"'{check_turn(turn=turn)}' choose field(or enter 'q' to quit): ")
+        draw = input(f"Player {str((turn % 2) + 1)}'s turn, choose field (or enter 'q' to quit): ")
 
         # allowing player to quit game
         if draw == "q":
@@ -50,12 +49,13 @@ def the_game(spots):
     if complete: print(f"{player} wins!")
     else: print("No winner!")
     
-    # allowing to play again 
+    # allowing to play again
     again = input("\nWould u like to play again? (Yes/No)").lower()
     if again == "yes" or again == "y":
         game = True
         complete = False
         spots = {1:"1", 2:"2", 3:"3", 4:"4", 5:"5", 6:"6", 7:"7", 8:"8", 9:"9"}
+        # method recall itself, for next round
         the_game(spots)
     elif again == "no" or again == "n":
         print("\nThanks for playing!\n")
